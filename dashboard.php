@@ -382,9 +382,9 @@
 										<tr>
 											<td><?= $row['temp'] ?></td>
 											<td><?= $row['hum'] ?></td>
-											<td><?= $row['bh1750'] ?></td>
+											<td><?= $row['light'] ?></td>
 											<td><?= $row['ph'] ?></td>
-											<td><?= $row['date'] ?></td>
+											<td><?= $row['date'].' '.$row['time'] ?></td>
 										</tr>
 									<?php }
 								} else {
@@ -510,11 +510,11 @@
 								$('#suhu1').html(data.temp)
 								$('#kelembapan').attr('data-value', data.hum)
 								$('#kelembapan1').html(data.hum)
-								$('#lux').attr('data-value', data.bh1750)
-								$('#lux1').html(data.bh1750)
+								$('#lux').attr('data-value', data.light)
+								$('#lux1').html(data.light)
 								$('#ldr').attr('data-value', data.ph)
 								$('#ldr1').html(data.ph)
-								$('#last').html(data.date)
+								$('#last').html(data.date+' '+data.time)
 								
 								$(".progress").each(function() {
 

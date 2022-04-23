@@ -19,10 +19,23 @@
             }
             echo json_encode($arr);
         }
+    } else {
+        if (!isset($_SESSION['user'])){
+            http_response_code(403);
+            echo json_encode(array("code"=>"403", "message" => "Unauthorize"));
+            return;
+        } else {
+            if ($_GET['action'] == 'latest') {
+                $result = $link->query('SELECT * FROM sensor ORDER BY id DESC LIMIT 1');
+                echo json_encode($result->fetch_assoc());
+            }
+            if ($_GET['action'] == 'chart') {
+                $result = $link->query('SELECT ROUND(AVG(`hum`), 2) as hum, ROUND(AVG(`temp`), 2) as temp, ROUND(AVG(`light`), 2) as light, ROUND(AVG(`ph`), 2) as ph, DATE(date) as date FROM sensor GROUP BY date');
+                while($row = $result->fetch_assoc()){
+                    $rows[$row['date']] = $row;
+                }
+                echo json_encode($rows);
+            }
+        }
     }
-	
-	if ($_GET['action'] == 'latest') {
-		$result = $link->query('SELECT * FROM sensor ORDER BY id DESC LIMIT 1');
-		echo json_encode($result->fetch_assoc());
-	}
 ?>
