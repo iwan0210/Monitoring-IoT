@@ -30,11 +30,24 @@
                 echo json_encode($result->fetch_assoc());
             }
             if ($_GET['action'] == 'chart') {
-                $result = $link->query('SELECT ROUND(AVG(`hum`), 2) as hum, ROUND(AVG(`temp`), 2) as temp, ROUND(AVG(`light`), 2) as light, ROUND(AVG(`ph`), 2) as ph, DATE(date) as date FROM sensor GROUP BY date');
+                $month = $_GET['month'];
+                $result = $link->query("SELECT ROUND(AVG(`hum`), 2) as hum, ROUND(AVG(`temp`), 2) as temp, ROUND(AVG(`light`), 2) as light, ROUND(AVG(`ph`), 2) as ph, DATE_FORMAT(date, '%d') as day FROM sensor WHERE date LIKE '$month%' GROUP BY date");
+                $data = array('status'=>'success');
+                $data['data'] = array();
+                $data['data']['month'] = date_format(new DateTime($month."-01"), "F Y");
+                $data['data']['date'] = array();
+                $data['data']['hum'] = array();
+                $data['data']['temp'] = array();
+                $data['data']['light'] = array();
+                $data['data']['ph'] = array();
                 while($row = $result->fetch_assoc()){
-                    $rows[$row['date']] = $row;
+                    array_push($data['data']['date'], $row['day']);
+                    array_push($data['data']['hum'], $row['hum']);
+                    array_push($data['data']['temp'], $row['temp']);
+                    array_push($data['data']['light'], $row['light']);
+                    array_push($data['data']['ph'], $row['ph']);
                 }
-                echo json_encode($rows);
+                echo json_encode($data);
             }
         }
     }

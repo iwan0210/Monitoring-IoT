@@ -1,4 +1,5 @@
 <?php
+    setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID');
 	session_start();	
 	if(!isset($_SESSION['user'])) {
 		header('Location: login.php');
@@ -11,6 +12,7 @@
 		return;
 	}
 	$result = $link->query('SELECT * FROM sensor ORDER BY id DESC LIMIT 100');
+    $resultMonth = $link->query('SELECT DATE_FORMAT(date, "%Y-%m") as date FROM sensor GROUP BY DATE_FORMAT(date, "%Y-%m")');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +43,7 @@
 		<link href="css/dataTable.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="css/style.min.css" rel="stylesheet" type="text/css" />
         <style>
             .progress {
@@ -408,6 +411,63 @@
         </Section>
         <!-- Counter End -->
 
+        <!-- Fetures Start -->
+        <section class="section" id="features">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="text-center mb-5">
+                            <h4 class="text-uppercase mb-0">cHART</h4>
+                            <div class="my-3">
+                                <img src="images/title-border.png" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="form-group">
+                                <label for="selectMonth">pilih bulan grafik</label>
+                                <select class="form-control" id="selectMonth">
+                                    <?php
+                                        if ($resultMonth->num_rows > 0) {
+                                            while ($row = $resultMonth->fetch_assoc()) { ?>
+                                                <option value="<?= $row['date']; ?>"><?= date_format(new DateTime($row['date']."-01"), "F Y") ?></option>
+                                            <?php }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <button type="button" id="loadChart" class="btn btn-outline-primary">Load</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="feature-box text-center px-4 py-5">
+                            <canvas id="tempChart"></canvas>
+                            <h6 class="text-uppercase mb-1 title f-18">Suhu Udara (°C)</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8">
+                        <div class="feature-box text-center px-4 py-5">
+                            <canvas id="humChart"></canvas>
+                            <h6 class="text-uppercase mb-1 title f-18">Kelembapan Tanah (%)</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8">
+                        <div class="feature-box text-center px-4 py-5">
+                            <canvas id="lightChart"></canvas>
+                            <h6 class="text-uppercase mb-1 title f-18">Intensitas Cahaya (Lux)</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8">
+                        <div class="feature-box text-center px-4 py-5">
+                            <canvas id="phChart"></canvas>
+                            <h6 class="text-uppercase mb-1 title f-18">pH Air</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Fetures End -->
+
         <!-- Footer Start -->
         <section class="footer">
             <div class="container">
@@ -444,6 +504,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
         <!-- Main Js -->
         <script src="js/app.js"></script>
         <script>
@@ -451,10 +512,134 @@
 			function sleep(ms) {
 				return new Promise(resolve => setTimeout(resolve, ms));
 			}
-
-            
 		
 			$(document).ready(function() {
+
+                $('#loadChart').click((e) => {
+                    e.preventDefault();
+                    const chart = Chart.getChart("tempChart");
+                    const chart1 = Chart.getChart("humChart");
+                    const chart2 = Chart.getChart("lightChart");
+                    const chart3 = Chart.getChart("phChart");
+                    if (chart) { 
+                        chart.destroy();
+                        chart1.destroy();
+                        chart2.destroy();
+                        chart3.destroy();
+                    }
+                    $('#loadChart').html('<i class="fa fa-spinner fa-pulse fa-fw"></i>')
+                    let val = $('#selectMonth').val();
+                    $.ajax({
+                        url: 'function.php?action=chart',
+                        type: 'get',
+                        data: {
+                            month: val
+                        },
+                        dataType:'json',
+                        success: (response) => {
+                            //suhu
+                            let tempChart = $('#tempChart')[0].getContext('2d');
+                            let chartTemp = new Chart(tempChart, {
+                                type: 'line',
+                                data: {
+                                    labels: response.data.date,
+                                    datasets: [
+                                        {
+                                            label: 'Suhu',
+                                            data: response.data.temp,
+                                            borderColor: 'rgba(54, 162, 235, 0.5)',
+                                            backgroundColor: 'rgba(54, 162, 235, 1)'
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: response.data.month
+                                        }
+                                    }
+                                }
+                            })
+
+                            //hum
+                            let humpChart = $('#humChart')[0].getContext('2d');
+                            let chartHum = new Chart(humChart, {
+                                type: 'line',
+                                data: {
+                                    labels: response.data.date,
+                                    datasets: [
+                                        {
+                                            label: 'Kelembapan',
+                                            data: response.data.hum,
+                                            borderColor: 'rgba(255, 99, 132, 0.5)',
+                                            backgroundColor: 'rgba(255, 99, 132, 1)'
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: response.data.month
+                                        }
+                                    }
+                                }
+                            })
+
+                            //light
+                            let lightChart = $('#lightChart')[0].getContext('2d');
+                            let chartLight = new Chart(lightChart, {
+                                type: 'line',
+                                data: {
+                                    labels: response.data.date,
+                                    datasets: [
+                                        {
+                                            label: 'Intensitas Cahaya',
+                                            data: response.data.light,
+                                            borderColor: 'rgba(75, 192, 192, 0.5)',
+                                            backgroundColor: 'rgba(75, 192, 192, 1)'
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: response.data.month
+                                        }
+                                    }
+                                }
+                            })
+
+                            //ph
+                            let phChart = $('#phChart')[0].getContext('2d');
+                            let chartPh = new Chart(phChart, {
+                                type: 'line',
+                                data: {
+                                    labels: response.data.date,
+                                    datasets: [
+                                        {
+                                            label: 'pH',
+                                            data: response.data.ph,
+                                            borderColor: 'rgba(241, 196, 15, 0.5)',
+                                            backgroundColor: 'rgba(241, 196, 15, 1)'
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: response.data.month
+                                        }
+                                    }
+                                }
+                            })
+                            $('#loadChart').html('Load')
+                        }
+                    })
+                })
 
 				$('#dataTable').DataTable({
 					order: [[ 4, "desc" ]],
