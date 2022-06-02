@@ -133,8 +133,8 @@
 				</div>
 					<div class="content">
 						<form method="POST" id="login_form">
-							<div class="input-box"><input id="username" name="username" type="text" placeholder="Username" required /></div>
-							<div class="input-box"><input id="password" name="password" type="password" placeholder="Password" required /></div>
+							<div class="input-box"><input id="user" name="user" type="text" placeholder="Username" required /></div>
+							<div class="input-box"><input id="pass" name="pass" type="password" placeholder="Password" required /></div>
 							<div class="input-box"><button id="button" type="submit" form="login_form">SIGN IN</button>
 							</div>
 						</form>
@@ -150,8 +150,8 @@
 				$('#button').html('<i class="fa fa-circle-o-notch fa-spin"></i>')
 				$('#button').attr('disabled', true)
 				
-				const username = $('#username').val().trim()
-				const password = $('#password').val().trim()
+				const username = $('#user').val().trim()
+				const password = $('#pass').val().trim()
 				
 				if (!username || !password) {
 					$('#button').html("SIGN IN")

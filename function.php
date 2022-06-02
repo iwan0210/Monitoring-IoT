@@ -1,5 +1,5 @@
 <?php
-    error_reporting(0);
+    error_reporting(1);
     session_start();
 	
 	$link = new mysqli("localhost", "root", "", "rifan");
@@ -11,11 +11,19 @@
 	
     if ($_GET['action'] == 'login') {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = json_decode(file_get_contents("php://input"));
             $arr = array("status"=>"fail", "message"=>"username / password salah!");
-            if ($_POST['user'] == 'rifan' && $_POST['pass'] == 'pekalongan10') {
-                $arr = array("status"=>"success", "message"=>"Berhasil login");
-                $_SESSION['user'] = "rifan";
+            $username = $link->real_escape_string($_POST["user"]);
+            $password = $link->real_escape_string($_POST["pass"]);
+            $stmt = $link->prepare("SELECT * FROM user WHERE username=?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $resultData = $result->fetch_assoc();
+                if (password_verify($password, $resultData["password"])) {
+                    $arr = array("status"=>"success", "message"=>"Berhasil login");
+                    $_SESSION['user'] = $resultData["username"];
+                }
             }
             echo json_encode($arr);
         }

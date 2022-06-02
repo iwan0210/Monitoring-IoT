@@ -509,9 +509,34 @@
         <script src="js/app.js"></script>
         <script>
 		
-			function sleep(ms) {
+			const sleep = (ms) => {
 				return new Promise(resolve => setTimeout(resolve, ms));
 			}
+
+            const percentageToDegrees = (percentage) => {
+                return percentage / 100 * 360
+            }
+
+            const progressData = () => {
+                $(".progress").each(function() {
+
+                    var value = $(this).attr('data-value');
+                    var max = $(this).attr('data-max');
+                    var val = value / max * 100;
+                    var left = $(this).find('.progress-left .progress-bar');
+                    var right = $(this).find('.progress-right .progress-bar');
+
+                    if (val > 0) {
+                        if (val <= 50) {
+                            right.css('transform', 'rotate(' + percentageToDegrees(val) + 'deg)')
+                        } else {
+                            right.css('transform', 'rotate(180deg)')
+                            left.css('transform', 'rotate(' + percentageToDegrees(val - 50) + 'deg)')
+                        }
+                    }
+
+                })
+            }
 		
 			$(document).ready(function() {
 
@@ -701,61 +726,15 @@
 								$('#ldr1').html(data.ph)
 								$('#last').html(data.date+' '+data.time)
 								
-								$(".progress").each(function() {
-
-									var value = $(this).attr('data-value');
-									var max = $(this).attr('data-max');
-									var val = value / max * 100;
-									var left = $(this).find('.progress-left .progress-bar');
-									var right = $(this).find('.progress-right .progress-bar');
-
-									if (val > 0) {
-									if (val <= 50) {
-										right.css('transform', 'rotate(' + percentageToDegrees(val) + 'deg)')
-									} else {
-										right.css('transform', 'rotate(180deg)')
-										left.css('transform', 'rotate(' + percentageToDegrees(val - 50) + 'deg)')
-									}
-									}
-
-									})
-
-									function percentageToDegrees(percentage) {
-
-										return percentage / 100 * 360
-
-									}
+                                progressData()
 							}
 						})
 						await sleep(5000)
 					}
 				})()
-			} );
+			});
 			
-            $(".progress").each(function() {
-
-                var value = $(this).attr('data-value');
-				var max = $(this).attr('data-max');
-				var val = value / max * 100;
-                var left = $(this).find('.progress-left .progress-bar');
-                var right = $(this).find('.progress-right .progress-bar');
-
-                if (val > 0) {
-                if (val <= 50) {
-                    right.css('transform', 'rotate(' + percentageToDegrees(val) + 'deg)')
-                } else {
-                    right.css('transform', 'rotate(180deg)')
-                    left.css('transform', 'rotate(' + percentageToDegrees(val - 50) + 'deg)')
-                }
-                }
-
-                })
-
-                function percentageToDegrees(percentage) {
-
-					return percentage / 100 * 360
-
-				}
+            progressData()
         </script>
 
     </body>
