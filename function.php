@@ -26,6 +26,7 @@
                 }
             }
             echo json_encode($arr);
+            return;
         }
     } else {
         if (!isset($_SESSION['user'])){
@@ -33,30 +34,73 @@
             echo json_encode(array("code"=>"403", "message" => "Unauthorize"));
             return;
         } else {
-            if ($_GET['action'] == 'latest') {
-                $result = $link->query('SELECT * FROM sensor ORDER BY id DESC LIMIT 1');
-                echo json_encode($result->fetch_assoc());
-            }
-            if ($_GET['action'] == 'chart') {
-                $month = $_GET['month'];
-                $result = $link->query("SELECT ROUND(AVG(`hum`), 2) as hum, ROUND(AVG(`temp`), 2) as temp, ROUND(AVG(`light`), 2) as light, ROUND(AVG(`ph`), 2) as ph, DATE_FORMAT(date, '%d') as day FROM sensor WHERE date LIKE '$month%' GROUP BY date");
-                $data = array('status'=>'success');
-                $data['data'] = array();
-                $data['data']['month'] = date_format(new DateTime($month."-01"), "F Y");
-                $data['data']['date'] = array();
-                $data['data']['hum'] = array();
-                $data['data']['temp'] = array();
-                $data['data']['light'] = array();
-                $data['data']['ph'] = array();
-                while($row = $result->fetch_assoc()){
-                    array_push($data['data']['date'], $row['day']);
-                    array_push($data['data']['hum'], $row['hum']);
-                    array_push($data['data']['temp'], $row['temp']);
-                    array_push($data['data']['light'], $row['light']);
-                    array_push($data['data']['ph'], $row['ph']);
+            if(isset($_GET['type']) && $_GET['type'] == "pembibitan" || $_GET['type'] == "pertumbuhan") {
+                $type = $_GET['type'];
+                if ($type == 'pembibitan') {
+                    if ($_GET['action'] == 'latest') {
+                        $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC LIMIT 1");
+                        echo json_encode($result->fetch_assoc());
+                        return;
+                    }
+                    if ($_GET['action'] == 'chart') {
+                        $month = $_GET['month'];
+                        $result = $link->query("SELECT ROUND(AVG(`temp_udr`), 2) as temp_udr, ROUND(AVG(`hum_udr`), 2) as hum_udr, ROUND(AVG(`temp_tnh`), 2) as temp_tnh, ROUND(AVG(`hum_tnh`), 2) as hum_tnh, ROUND(AVG(`light`), 2) as light, DATE_FORMAT(date, '%d') as day FROM sensor_pembibitan WHERE date LIKE '$month%' GROUP BY date");
+                        $data = array('status'=>'success');
+                        $data['data'] = array();
+                        $data['data']['month'] = date_format(new DateTime($month."-01"), "F Y");
+                        $data['data']['date'] = array();
+                        $data['data']['temp_udr'] = array();
+                        $data['data']['hum_udr'] = array();
+                        $data['data']['temp_tnh'] = array();
+                        $data['data']['hum_tnh'] = array();
+                        $data['data']['light'] = array();
+                        while($row = $result->fetch_assoc()){
+                            array_push($data['data']['date'], $row['day']);
+                            array_push($data['data']['temp_udr'], $row['temp_udr']);
+                            array_push($data['data']['hum_udr'], $row['hum_udr']);
+                            array_push($data['data']['temp_tnh'], $row['temp_tnh']);
+                            array_push($data['data']['hum_tnh'], $row['hum_tnh']);
+                            array_push($data['data']['light'], $row['light']);
+                        }
+                        echo json_encode($data);
+                        return;
+                    } 
                 }
-                echo json_encode($data);
+                if ($type == 'pertumbuhan') {
+                    if ($_GET['action'] == 'latest') {
+                        $result = $link->query("SELECT * FROM sensor_pertumbuhan ORDER BY id DESC LIMIT 1");
+                        echo json_encode($result->fetch_assoc());
+                        return;
+                    }
+                    if ($_GET['action'] == 'chart') {
+                        $month = $_GET['month'];
+                        $result = $link->query("SELECT ROUND(AVG(`temp_udr`), 2) as temp_udr, ROUND(AVG(`hum_udr`), 2) as hum_udr, ROUND(AVG(`temp_tnh`), 2) as temp_tnh, ROUND(AVG(`hum_tnh`), 2) as hum_tnh, ROUND(AVG(`light`), 2) as light, ROUND(AVG(`ph`), 2) as ph, DATE_FORMAT(date, '%d') as day FROM sensor_pertumbuhan WHERE date LIKE '$month%' GROUP BY date");
+                        $data = array('status'=>'success');
+                        $data['data'] = array();
+                        $data['data']['month'] = date_format(new DateTime($month."-01"), "F Y");
+                        $data['data']['date'] = array();
+                        $data['data']['temp_udr'] = array();
+                        $data['data']['hum_udr'] = array();
+                        $data['data']['temp_tnh'] = array();
+                        $data['data']['hum_tnh'] = array();
+                        $data['data']['light'] = array();
+                        $data['data']['ph'] = array();
+                        while($row = $result->fetch_assoc()){
+                            array_push($data['data']['date'], $row['day']);
+                            array_push($data['data']['temp_udr'], $row['temp_udr']);
+                            array_push($data['data']['hum_udr'], $row['hum_udr']);
+                            array_push($data['data']['temp_tnh'], $row['temp_tnh']);
+                            array_push($data['data']['hum_tnh'], $row['hum_tnh']);
+                            array_push($data['data']['light'], $row['light']);
+                            array_push($data['data']['ph'], $row['ph']);
+                        }
+                        echo json_encode($data);
+                        return;
+                    }
+                }
             }
         }
     }
+    header('HTTP/1.0 404 Not Found', true, 404);
+    die();
 ?>
