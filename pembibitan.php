@@ -32,6 +32,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css" />
         <link href="css/style.min.css" rel="stylesheet" type="text/css" />
         <style>
             .progress {
@@ -285,7 +286,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="temp_udr" data-value='0' data-max='100'> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="temp_udr" data-value='0' data-max='100' data-alert='40' data-title="Suhu Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold"  id="data">0</div>
                                     </div>
@@ -297,7 +298,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="hum_udr" data-value='0' data-max='100'> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="hum_udr" data-value='0' data-max='100' data-alert='40' data-title="Kelembapan Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -309,7 +310,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="temp_tnh" data-value='0' data-max='100'> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="temp_tnh" data-value='0' data-max='100' data-alert='40' data-title="Suhu Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -321,7 +322,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="hum_tnh" data-value='0' data-max='100'> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="hum_tnh" data-value='0' data-max='100' data-alert='40' data-title="Kelembapan Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -333,7 +334,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="light" data-value='0' data-max='65535'> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="light" data-value='0' data-max='65535' data-alert='1000' data-title="Intensitas Cahaya"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -510,6 +511,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <!-- Main Js -->
         <script src="js/app.js"></script>
         <script>
@@ -527,9 +529,41 @@
 
                     var value = $(this).attr('data-value');
                     var max = $(this).attr('data-max');
+                    var alert = $(this).attr('data-alert');
+                    var title = $(this).attr('data-title');
                     var val = value / max * 100;
                     var left = $(this).find('.progress-left .progress-bar');
                     var right = $(this).find('.progress-right .progress-bar');
+
+                    if (value > alert) {
+                        left.attr("style", "border-color: #dc3545 !important")
+                        right.attr("style", "border-color: #dc3545 !important")
+                        $(this).find('.h2').attr("style", "color: #dc3545 !important");
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "3000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+
+                        toastr.error(title+' melewati batas normal')
+                    } else {
+                        left.attr("style", "border-color: #007bff !important")
+                        right.attr("style", "border-color: #007bff !important")
+                        $(this).find('.h2').attr("style", "color: #007bff !important");
+                    }
 
                     if (val > 0) {
                         if (val <= 50) {
@@ -760,7 +794,7 @@
                                 progressData()
 							}
 						})
-						await sleep(5000)
+						await sleep(10000)
 					}
 				})()
 			});
