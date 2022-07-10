@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 04/07/2022 12:45:22
+ Date: 10/07/2022 14:52:45
 */
 
 SET NAMES utf8mb4;
@@ -86,6 +86,33 @@ INSERT INTO `sensor_pertumbuhan` VALUES (11, '2022-06-11', '33.2', '73', '29.9',
 INSERT INTO `sensor_pertumbuhan` VALUES (12, '2022-06-12', '31.2', '76', '28.3', '86', '6.4', '1450', 0, '12:16:39');
 INSERT INTO `sensor_pertumbuhan` VALUES (13, '2022-06-13', '30.8', '78', '28.8', '88', '6.4', '1300', 0, '12:16:39');
 INSERT INTO `sensor_pertumbuhan` VALUES (14, '2022-06-14', '34.2', '73', '30.3', '82', '6.1', '1600', 0, '12:16:39');
+
+-- ----------------------------
+-- Table structure for settings
+-- ----------------------------
+DROP TABLE IF EXISTS `settings`;
+CREATE TABLE `settings`  (
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `temp_udr_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `temp_udr_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `hum_udr_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `hum_udr_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `temp_tnh_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `temp_tnh_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `hum_tnh_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `hum_tnh_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `light_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `light_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `ph_min` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  `ph_max` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0',
+  PRIMARY KEY (`type`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of settings
+-- ----------------------------
+INSERT INTO `settings` VALUES ('pembibitan', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `settings` VALUES ('pertumbuhan', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for user

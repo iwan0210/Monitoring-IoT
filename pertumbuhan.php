@@ -1,6 +1,7 @@
 <?php
     $result = $link->query("SELECT * FROM sensor_pertumbuhan ORDER BY id DESC LIMIT 100");
     $resultMonth = $link->query("SELECT DATE_FORMAT(date, '%Y-%m') as date FROM sensor_pertumbuhan GROUP BY DATE_FORMAT(date, '%Y-%m')");
+    $resultSettings = $link->query("SELECT * FROM settings WHERE type='pertumbuhan'")->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -283,10 +284,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6 col-md-8">
+                <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="temp_udr" data-value='0' data-max='100' data-alert="40" data-title="Suhu Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="temp_udr" data-value='0' data-max='100' data-alert-min='<?= $resultSettings["temp_udr_min"] ?>' data-alert-max='<?= $resultSettings["temp_udr_max"] ?>' data-title="Suhu Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold"  id="data">0</div>
                                     </div>
@@ -295,10 +296,10 @@
                             <h6 class="text-uppercase mb-1 title f-18">Suhu Udara (°C)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="hum_udr" data-value='0' data-max='100' data-alert="40" data-title="Kelembapan Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="hum_udr" data-value='0' data-max='100' data-alert-min='<?= $resultSettings["hum_udr_min"] ?>' data-alert-max='<?= $resultSettings["hum_udr_max"] ?>' data-title="Kelembapan Udara"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -307,10 +308,10 @@
                             <h6 class="text-uppercase mb-1 title f-18">Kelembapan Udara (%)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="temp_tnh" data-value='0' data-max='100' data-alert="40" data-title="Suhu Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="temp_tnh" data-value='0' data-max='100' data-alert-min='<?= $resultSettings["temp_tnh_min"] ?>' data-alert-max='<?= $resultSettings["temp_tnh_max"] ?>' data-title="Suhu Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -319,10 +320,10 @@
                             <h6 class="text-uppercase mb-1 title f-18">Suhu Tanah (°C)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="hum_tnh" data-value='0' data-max='100' data-alert="40" data-title="Kelembapan Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="hum_tnh" data-value='0' data-max='100' data-alert-min='<?= $resultSettings["hum_tnh_min"] ?>' data-alert-max='<?= $resultSettings["hum_tnh_max"] ?>' data-title="Kelembapan Tanah"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -331,10 +332,10 @@
                             <h6 class="text-uppercase mb-1 title f-18">Kelembapan Tanah (%)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="light" data-value='0' data-max='65535' data-alert="1000" data-title="Intensitas Cahaya"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="light" data-value='0' data-max='65535' data-alert-min='<?= $resultSettings["light_min"] ?>' data-alert-max='<?= $resultSettings["light_max"] ?>' data-title="Intensitas Cahaya"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -343,10 +344,10 @@
                             <h6 class="text-uppercase mb-1 title f-18">Intensitas Cahaya (Lux)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <div class="text-primary feature-icon mb-3">
-                                <div class="progress mx-auto" id="ph" data-value='0' data-max='100' data-alert="40" data-title="Ph Air"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
+                                <div class="progress mx-auto" id="ph" data-value='0' data-max='100' data-alert-min='<?= $resultSettings["ph_min"] ?>' data-alert-max='<?= $resultSettings["ph_max"] ?>' data-title="Ph Air"> <span class="progress-left"> <span class="progress-bar border-primary"></span> </span> <span class="progress-right"> <span class="progress-bar border-primary"></span> </span>
                                     <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
                                         <div class="h2 font-weight-bold" id="data">0</div>
                                     </div>
@@ -377,7 +378,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
 					<br />
-                    <table id="dataTable" class="table table-bordered">
+                    <table id="dataTable" class="table table-bordered table-responsive">
 						<thead>
 							<tr>
 								<th>Suhu Udara</th>
@@ -452,37 +453,37 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="tempAirChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Suhu Udara (°C)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="humAirChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Kelembapan Udara (%)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="tempSoilChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Suhu Tanah (°C)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="humSoilChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Kelembapan Tanah (%)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="lightChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Intensitas Cahaya (Lux)</h6>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-4 col-md-6">
                         <div class="feature-box text-center px-4 py-5">
                             <canvas id="phChart"></canvas>
                             <h6 class="text-uppercase mb-1 title f-18">Ph Air</h6>
@@ -546,20 +547,16 @@
             const progressData = () => {
                 $(".progress").each(function() {
 
-                    var value = $(this).attr('data-value');
-                    var max = $(this).attr('data-max');
-                    var alert = $(this).attr('data-alert');
+                    var value = parseFloat($(this).attr('data-value'));
+                    var max = parseFloat($(this).attr('data-max'));
+                    var batasBawah = parseFloat($(this).attr('data-alert-min'));
+                    var batasAtas = parseFloat($(this).attr('data-alert-mix'));
                     var title = $(this).attr('data-title');
                     var val = value / max * 100;
                     var left = $(this).find('.progress-left .progress-bar');
                     var right = $(this).find('.progress-right .progress-bar');
 
-                    if (value > alert) {
-                        left.attr("style", "border-color: #dc3545 !important")
-                        right.attr("style", "border-color: #dc3545 !important")
-                        $(this).find('.h2').attr("style", "color: #dc3545 !important");
-
-                        toastr.options = {
+                    toastr.options = {
                             "closeButton": false,
                             "debug": false,
                             "newestOnTop": false,
@@ -577,7 +574,18 @@
                             "hideMethod": "fadeOut"
                         }
 
-                        toastr.error(title+' melewati batas normal')
+                    if (value < batasBawah) {
+                        left.attr("style", "border-color: #dc3545 !important")
+                        right.attr("style", "border-color: #dc3545 !important")
+                        $(this).find('.h2').attr("style", "color: #dc3545 !important");
+
+                        toastr.error(title+' dibawah batas normal')
+                    } else if(value > batasAtas) {
+                        left.attr("style", "border-color: #dc3545 !important")
+                        right.attr("style", "border-color: #dc3545 !important")
+                        $(this).find('.h2').attr("style", "color: #dc3545 !important");
+
+                        toastr.error(title+' diatas batas normal')
                     } else {
                         left.attr("style", "border-color: #007bff !important")
                         right.attr("style", "border-color: #007bff !important")
@@ -781,7 +789,7 @@
 
 				$('#dataTable').DataTable({
                     responsive: true,
-					order: [[ 4, "desc" ]],
+					order: [[ 6, "desc" ]],
                     //searching: false,
                     dom : '<"top"Bf>rt<"bottom"ilp><"clear">',
 					buttons: [
@@ -810,7 +818,7 @@
 					function(settings, data, dataIndex) {
 						var min = $('#min-date').val();
 						var max = $('#max-date').val();
-						var createdAt = data[4] || 0; // Our date column in the table
+						var createdAt = data[6] || 0; // Our date column in the table
 						if ((min == "" || max == "") || (moment(createdAt).isSameOrAfter(min+" 00:00:00") && moment(createdAt).isSameOrBefore(max+" 23:59:59"))) {
 							return true;
 						}
