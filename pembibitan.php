@@ -152,6 +152,9 @@
                         <li class="nav-item active">
                             <a href="#home" class="nav-link">Home</a>
                         </li>
+                        <li class="nav-item active">
+                            <a href="dashboard.php" class="nav-link">Pindah</a>
+                        </li>
                         <li class="nav-item">
                             <a href="#features" class="nav-link">Monitoring</a>
                         </li>
