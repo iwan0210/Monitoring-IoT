@@ -152,9 +152,6 @@
                         <li class="nav-item active">
                             <a href="#home" class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item active">
-                            <a href="dashboard.php" class="nav-link">Pindah</a>
-                        </li>
                         <li class="nav-item">
                             <a href="#features" class="nav-link">Monitoring</a>
                         </li>
@@ -163,6 +160,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="#chart" class="nav-link">Grafik</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#pindah" onclick="pindah(event)" class="nav-link">Pindah</a>
                         </li>
                         <li class="nav-item">
                             <a href="logout.php" class="nav-link">Log Out</a>
@@ -522,6 +522,11 @@
 			const sleep = (ms) => {
 				return new Promise(resolve => setTimeout(resolve, ms));
 			}
+
+            const pindah = (e) => {
+                e.preventDefault()
+                location.href = 'dashboard.php?type=pertumbuhan'
+            }
 
             const percentageToDegrees = (percentage) => {
                 return percentage / 100 * 360
