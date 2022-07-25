@@ -14,7 +14,7 @@
         <meta name="keywords" content="bootstrap 4, premium, marketing, multipurpose" />
         <meta content="Themesdesign" name="author" />
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="images/icon/favicon.ico">
 
         <!--Slider-->
         <link rel="stylesheet" href="css/owl.carousel.min.css" />
@@ -140,9 +140,9 @@
         <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark">
             <div class="container">
                 <!-- LOGO -->
-                <a class="navbar-brand logo" href="layout-one-1.html">
-                    <img src="images/logo-dark.png" alt="" class="logo-dark" height="21">
-                    <img src="images/logo-light.png" alt="" class="logo-light" height="21">
+                <a class="navbar-brand logo" href="#">
+                    <img src="images/logo.png" alt="" class="logo-dark" height="31">
+                    <img src="images/logo.png" alt="" class="logo-light" height="31">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="mdi mdi-menu"></i>
@@ -179,7 +179,7 @@
                 <div class="row">
                     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active d-flex align-items-center" style="background: url(images/slider/img-1.jpg) center center;">
+                            <div class="carousel-item active d-flex align-items-center" style="background: url(images/slider/gambar1.webp) center center;">
                                 <div class="bg-overlay"></div>
                                 <div class="container">
                                     <div class="row justify-content-center">
@@ -187,12 +187,6 @@
                                             <div class="text-center">
                                                 <h1 class="text-white hero-5-title mb-0">A Clean & Minimal Landing Template</h1>
                                                 <p class="text-white-70 hero-5-subtitle mt-4 f-15 mb-0">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid a commodi consequatur Quis autem vel eum iure reprehenderit qui in ea voluptate.</p>
-                                                <div class="watch-video mt-5">
-                                                    <a href="#" class="btn btn-primary mr-4">Learn More</a>
-                                                    <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i class="mdi mdi-play play-icon-circle text-muted mr-2"></i> 
-                                                        <span class="f-14">Watch The Video!</span>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                         <!-- col end -->
@@ -203,7 +197,7 @@
                             </div>
                             <!-- carousel-item end -->
 
-                            <div class="carousel-item d-flex align-items-center" style="background: url(images/slider/img-2.jpg) center center;">
+                            <div class="carousel-item d-flex align-items-center" style="background: url(images/slider/gambar2.webp) center center;">
                                 <div class="bg-overlay"></div>
                                 <div class="container">
                                     <div class="row justify-content-center">
@@ -211,36 +205,6 @@
                                             <div class="text-center">
                                                 <h1 class="text-white hero-5-title mb-0">Professional, Multipurpose Landing Page</h1>
                                                 <p class="text-white-70 mt-4 hero-5-subtitle f-15 mb-0">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid a commodi consequatur Quis autem vel eum iure reprehenderit qui in ea voluptate.</p>
-                                                <div class="watch-video mt-5">
-                                                    <a href="#" class="btn btn-primary mr-4">Learn More</a>
-                                                    <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i class="mdi mdi-play play-icon-circle text-muted mr-2"></i> 
-                                                        <span class="f-14">Watch The Video!</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- col end -->
-                                    </div>
-                                    <!-- row end -->
-                                </div>
-                                <!-- container end -->
-                            </div>
-                            <!-- carousel-item end -->
-
-                            <div class="carousel-item d-flex align-items-center" style="background: url(images/slider/img-3.jpg) center center;">
-                                <div class="bg-overlay"></div>
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-7 col-md-10">
-                                            <div class="text-center">
-                                                <h1 class="text-white hero-5-title mb-0">Performancect Solution For Small Businesses</h1>
-                                                <p class="text-white-70 mt-4 hero-5-subtitle f-15 mb-0">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid a commodi consequatur Quis autem vel eum iure reprehenderit qui in ea voluptate.</p>
-                                                <div class="watch-video mt-5">
-                                                    <a href="#" class="btn btn-primary mr-4">Learn More</a>
-                                                    <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i class="mdi mdi-play play-icon-circle text-muted mr-2"></i> 
-                                                        <span class="f-14">Watch The Video!</span>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                         <!-- col end -->
@@ -628,8 +592,8 @@
                                         {
                                             label: 'Suhu Udara',
                                             data: response.data.temp_udr,
-                                            borderColor: 'rgba(54, 162, 235, 0.5)',
-                                            backgroundColor: 'rgba(54, 162, 235, 1)'
+                                            borderColor: 'rgba(51, 48, 228, 0.5)',
+                                            backgroundColor: 'rgba(51, 48, 228, 1)'
                                         }
                                     ]
                                 },
@@ -653,8 +617,8 @@
                                         {
                                             label: 'Kelembapan Udara',
                                             data: response.data.hum_udr,
-                                            borderColor: 'rgba(255, 99, 132, 0.5)',
-                                            backgroundColor: 'rgba(255, 99, 132, 1)'
+                                            borderColor: 'rgba(0, 56, 101, 0.5)',
+                                            backgroundColor: 'rgba(0, 56, 101, 1)'
                                         }
                                     ]
                                 },
@@ -676,10 +640,10 @@
                                     labels: response.data.date,
                                     datasets: [
                                         {
-                                            label: 'Suhu Udara',
+                                            label: 'Suhu Tanah',
                                             data: response.data.temp_tnh,
-                                            borderColor: 'rgba(54, 162, 235, 0.5)',
-                                            backgroundColor: 'rgba(54, 162, 235, 1)'
+                                            borderColor: 'rgba(239, 91, 12, 0.5)',
+                                            backgroundColor: 'rgba(239, 91, 12, 1)'
                                         }
                                     ]
                                 },
@@ -701,10 +665,10 @@
                                     labels: response.data.date,
                                     datasets: [
                                         {
-                                            label: 'Kelembapan Udara',
+                                            label: 'Kelembapan Tanah',
                                             data: response.data.hum_tnh,
-                                            borderColor: 'rgba(255, 99, 132, 0.5)',
-                                            backgroundColor: 'rgba(255, 99, 132, 1)'
+                                            borderColor: 'rgba(161, 114, 253, 0.5)',
+                                            backgroundColor: 'rgba(161, 114, 253, 1)'
                                         }
                                     ]
                                 },
@@ -728,8 +692,8 @@
                                         {
                                             label: 'Intensitas Cahaya',
                                             data: response.data.light,
-                                            borderColor: 'rgba(75, 192, 192, 0.5)',
-                                            backgroundColor: 'rgba(75, 192, 192, 1)'
+                                            borderColor: 'rgba(214, 28, 78, 0.5)',
+                                            backgroundColor: 'rgba(214, 28, 78, 1)'
                                         }
                                     ]
                                 },

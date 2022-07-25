@@ -8,7 +8,7 @@
         <meta name="keywords" content="bootstrap 4, premium, marketing, multipurpose" />
         <meta content="Themesdesign" name="author" />
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="images/icon/favicon.ico">
 
         <!--Slider-->
         <link rel="stylesheet" href="css/owl.carousel.min.css" />
