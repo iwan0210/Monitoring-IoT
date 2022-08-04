@@ -1,5 +1,4 @@
 <?php
-    $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC LIMIT 1000");
     $resultMonth = $link->query("SELECT DATE_FORMAT(date, '%Y-%m') as date FROM sensor_pembibitan GROUP BY DATE_FORMAT(date, '%Y-%m')");
     $resultSettings = $link->query("SELECT * FROM settings WHERE type='pembibitan'")->fetch_assoc();
 ?>
@@ -344,24 +343,6 @@
 								<th>Waktu</th>
 							</tr>
 						</thead>
-						<tbody>
-							<?php
-								if ($result->num_rows > 0) {
-									while ($row = $result->fetch_assoc()) { ?>
-										<tr>
-											<td><?= $row['temp_udr'] ?></td>
-											<td><?= $row['hum_udr'] ?></td>
-                                            <td><?= $row['temp_tnh'] ?></td>
-											<td><?= $row['hum_tnh'] ?></td>
-											<td><?= $row['light'] ?></td>
-											<td><?= $row['date'].' '.$row['time'] ?></td>
-										</tr>
-									<?php }
-								} else {
-									echo "<tr><td colspan='5' style='text-align:center;'>0 data</td></tr>";
-								}
-							?>
-						</tbody>
 					</table>
                 </div>
             </div>
@@ -724,7 +705,16 @@
 							className: 'btn btn-success',
 							title: 'Table Data Sensor'
 						}
-					]
+					],
+                    ajax: 'function.php?action=allData&type=pembibitan',
+                    columns: [
+                        { data: 'temp_udr' },
+                        { data: 'hum_udr' },
+                        { data: 'temp_tnh' },
+                        { data: 'hum_tnh' },
+                        { data: 'light' },
+                        { data: 'date' }
+                    ]
 				});
 
                 // Re-draw the table when the a date range filter changes

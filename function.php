@@ -60,6 +60,16 @@
                         echo json_encode($data);
                         return;
                     } 
+
+                    if ($_GET['action'] == allData) {
+                        $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC");
+                        $rows = array();
+                        while($r = $result->fetch_assoc()){
+                            $rows['data'][] = array('temp_udr'=>$r['temp_udr'],'hum_udr'=>$r['hum_udr'],'temp_tnh'=>$r['temp_tnh'],'hum_tnh'=>$r['hum_tnh'],'light'=>$r['light'],'date'=>$r['date']." ".$r['time']);
+                        }
+                        echo json_encode($rows);
+                        return;
+                    }
                 }
                 if ($type == 'pertumbuhan') {
                     if ($_GET['action'] == 'latest') {
@@ -90,6 +100,16 @@
                             array_push($data['data']['ph'], $row['ph']);
                         }
                         echo json_encode($data);
+                        return;
+                    }
+
+                    if ($_GET['action'] == allData) {
+                        $result = $link->query("SELECT * FROM sensor_pertumbuhan ORDER BY id DESC");
+                        $rows = array();
+                        while($r = $result->fetch_assoc()){
+                            $rows['data'][] = array('temp_udr'=>$r['temp_udr'],'hum_udr'=>$r['hum_udr'],'temp_tnh'=>$r['temp_tnh'],'hum_tnh'=>$r['hum_tnh'],'light'=>$r['light'],'ph'=>$r['ph'],'date'=>$r['date']." ".$r['time']);
+                        }
+                        echo json_encode($rows);
                         return;
                     }
                 }
