@@ -1,5 +1,5 @@
 <?php
-    $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC LIMIT 100");
+    $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC LIMIT 1000");
     $resultMonth = $link->query("SELECT DATE_FORMAT(date, '%Y-%m') as date FROM sensor_pembibitan GROUP BY DATE_FORMAT(date, '%Y-%m')");
     $resultSettings = $link->query("SELECT * FROM settings WHERE type='pembibitan'")->fetch_assoc();
 ?>
@@ -216,14 +216,14 @@
                             <!-- carousel-item end -->
                         </div>
 
-                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
                             <div class="slide-icon">
                                 <i class="pe-7s-angle-left"></i>
                             </div>
                             <span class="sr-only">Previous</span>
                         </a>
 
-                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#" role="button" data-slide="next">
                             <div class="slide-icon">
                                 <i class="pe-7s-angle-right"></i>
                             </div>
@@ -777,8 +777,6 @@
 					}
 				})()
 			});
-			
-            progressData()
         </script>
 
     </body>
