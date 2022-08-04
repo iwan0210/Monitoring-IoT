@@ -61,7 +61,7 @@
                         return;
                     } 
 
-                    if ($_GET['action'] == allData) {
+                    if ($_GET['action'] == 'allData') {
                         $result = $link->query("SELECT * FROM sensor_pembibitan ORDER BY id DESC");
                         $rows = array();
                         while($r = $result->fetch_assoc()){
@@ -103,7 +103,7 @@
                         return;
                     }
 
-                    if ($_GET['action'] == allData) {
+                    if ($_GET['action'] == 'allData') {
                         $result = $link->query("SELECT * FROM sensor_pertumbuhan ORDER BY id DESC");
                         $rows = array();
                         while($r = $result->fetch_assoc()){
