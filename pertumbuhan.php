@@ -185,8 +185,8 @@
                                     <div class="row justify-content-center">
                                         <div class="col-lg-7 col-md-10">
                                             <div class="text-center">
-                                                <h1 class="text-white hero-5-title mb-0">A Clean & Minimal Landing Template</h1>
-                                                <p class="text-white-70 hero-5-subtitle mt-4 f-15 mb-0">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid a commodi consequatur Quis autem vel eum iure reprehenderit qui in ea voluptate.</p>
+                                                <h1 class="text-white hero-5-title mb-0">Sistem Monitoring Smart Greenhouse Melon</h1>
+                                                <p class="text-white-70 hero-5-subtitle mt-4 f-15 mb-0">Selamat datang di Web ini. Ini merupakan tampilan dashboard untuk monitoring pertumbuhan tanaman melon.</p>
                                             </div>
                                         </div>
                                         <!-- col end -->
@@ -203,8 +203,8 @@
                                     <div class="row justify-content-center">
                                         <div class="col-lg-7 col-md-10">
                                             <div class="text-center">
-                                                <h1 class="text-white hero-5-title mb-0">Professional, Multipurpose Landing Page</h1>
-                                                <p class="text-white-70 mt-4 hero-5-subtitle f-15 mb-0">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid a commodi consequatur Quis autem vel eum iure reprehenderit qui in ea voluptate.</p>
+                                                <h1 class="text-white hero-5-title mb-0">About</h1>
+                                                <p class="text-white-70 mt-4 hero-5-subtitle f-15 mb-0">SIMON-SGM merupakan Sistem Monitoring Smart Green House Melon yang dapat memantau kondisi suhu udara, kelembapan udara, suhu tanah, kelembapan tanah, serta intensitas cahaya pada budidaya tanaman melon melalui web.</p>
                                             </div>
                                         </div>
                                         <!-- col end -->
