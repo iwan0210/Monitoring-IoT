@@ -332,7 +332,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
 					<br />
-                    <table id="dataTable" class="table table-bordered table-responsive">
+                    <table id="dataTable" class="table table-bordered display" width="100%">
 						<thead>
 							<tr>
 								<th>Suhu Udara</th>
@@ -450,6 +450,7 @@
         <script src="js/owl.carousel.min.js"></script>
 		<script src="js/jquery.dataTable.min.js"></script>
 		<script src="js/dataTable.bootstrap.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
@@ -694,7 +695,7 @@
                 })
 
 				$('#dataTable').DataTable({
-                    responsive: true,
+                    scrollX: true,
 					order: [[ 5, "desc" ]],
                     //searching: false,
                     dom : '<"top"Bf>rt<"bottom"ilp><"clear">',
