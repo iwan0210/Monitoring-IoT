@@ -166,6 +166,12 @@
                         <li class="nav-item">
                             <a href="logout.php" class="nav-link">Log Out</a>
                         </li>
+                        <li class="nav-item">
+                            <div class="custom-control custom-switch" style="padding-top: 5px;">
+                                <input type="checkbox" class="custom-control-input" disabled id="pumpStatus">
+                                <label class="custom-control-label" for="pumpStatus">Pompa Status</label>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -495,7 +501,7 @@
                             "debug": false,
                             "newestOnTop": false,
                             "progressBar": true,
-                            "positionClass": "toast-top-right",
+                            "positionClass": "toast-bottom-right",
                             "preventDuplicates": false,
                             "onclick": null,
                             "showDuration": "300",
@@ -760,6 +766,8 @@
 								$('#hum_tnh').attr('data-value', data.hum_tnh).find('#data').text(data.hum_tnh)
 								$('#light').attr('data-value', data.light).find('#data').text(data.light)
 								$('#last').html(data.date+' '+data.time)
+                                const relay = (data.relay == '1') ? true : false
+                                $('#pumpStatus').attr('checked', relay)
 								
                                 progressData()
 							}
