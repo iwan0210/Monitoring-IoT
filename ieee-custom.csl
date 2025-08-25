@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+  <info>
+    <title>IEEE with Custom Bibliography</title>
+    <id>http://www.zotero.org/styles/ieee-custom</id>
+    <link href="http://www.zotero.org/styles/ieee" rel="template"/>
+    <author>
+      <name>Custom GPT</name>
+    </author>
+    <category citation-format="numeric"/>
+    <updated>2025-08-22T00:00:00+00:00</updated>
+  </info>
+
+  <!-- Citation part: still IEEE numeric -->
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout delimiter=",">
+      <text variable="citation-number" prefix="[" suffix="]"/>
+    </layout>
+  </citation>
+
+  <!-- Bibliography part: Custom format -->
+  <bibliography>
+    <sort>
+      <key macro="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=", ">
+        <text macro="author-short"/>
+        <text macro="year"/>
+        <text variable="title"/>
+        <text variable="container-title" font-style="italic"/>
+        <group delimiter=" ">
+          <text variable="volume"/>
+          <group prefix="(" suffix=")">
+            <text variable="issue"/>
+          </group>
+        </group>
+        <text variable="page"/>
+      </group>
+    </layout>
+  </bibliography>
+
+  <!-- Author short macro (Lastname, Initials.) -->
+  <macro name="author-short">
+    <names variable="author">
+      <name form="short" initialize-with="." delimiter=", " name-as-sort-order="all"/>
+    </names>
+  </macro>
+
+  <!-- Year macro -->
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+</style>
