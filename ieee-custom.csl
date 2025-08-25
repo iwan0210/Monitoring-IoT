@@ -36,7 +36,7 @@
       <group delimiter=", ">
         <text variable="volume"/>
         <text variable="issue" prefix="(" suffix=")"/>
-        <text variable="page" prefix="pp."/>
+        <text variable="page-range" prefix="pp."/>
       </group>
     </layout>
   </bibliography>
